@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <!-- 引入react核心库，必须在第一个 -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <!-- 引入react-dom，用于react操作DOM -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 引入babel，将jsx转为js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+      class Person extends React.Component {
+        state = {
+          persons: [
+            {
+              id: 1,
+              name: 'Tom',
+              age: 18,
+            },
+            {
+              id: 2,
+              name: 'Alan',
+              age: 19,
+            },
+          ],
+        };
+        addBob = () => {
+          const { persons } = this.state;
+          const p = {
+            id: persons.length + 1,
+            name: 'Bob',
+            age: 20,
+          };
+          this.setState({
+            persons: [p, ...persons],
+          });
+        };
+        render() {
+          return (
+            <div>
+              <h1>展示人员信息</h1>
+              <button onClick={this.addBob}>添加Bob</button>
+              <ul>
+                {this.state.persons.map((person, index) => {
+                  return (
+                    <li key={index}>
+                      {person.name}, {person.age}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Person />, document.getElementById('test'));
+    </script>
+  </body>
+</html>

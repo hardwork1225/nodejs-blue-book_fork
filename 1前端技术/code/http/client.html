@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+      function HTTPTest() {
+        if ('XMLHttpRequest' in window) {
+          alert('您的浏览器支持 XMLHttpRequest!');
+          // 创建ajax对象并实例化
+          var xhr = new XMLHttpRequest();
+          // 设置请求方式和请求地址
+          xhr.open('POST', 'http://127.0.0.1:3008');
+          // readystate是xhr对象中的属性，用来获取ajax状态码 0 1 2 3 4
+          xhr.onreadystatechange = function () {
+            // 判断ajax状态码
+            // status获取http状态码。200表示ok
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              // xhr.responseText表示请求返回的数据内容
+              console.log(xhr.responseText);
+            }
+          };
+          // 发送
+          xhr.send('Hello Server!');
+        } else {
+          // 浏览器不支持 XMLHttpRequest
+          alert('您的浏览器不支持 XMLHttpRequest!');
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="sse">
+      <a href="javascript:HTTPTest()">运行 HTTP</a>
+    </div>
+  </body>
+</html>
